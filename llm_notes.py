@@ -1,58 +1,53 @@
+from transformers import pipeline
+import streamlit as st
+
+
+@st.cache_resource
+def load_model():
+
+    return pipeline(
+
+        "summarization",
+
+        model="sshleifer/distilbart-cnn-12-6"
+
+    )
+
+
 def generate_notes(text):
 
     text = text.strip()
 
-    if len(text.split()) < 20:
+    if len(text.split()) < 30:
 
         return {
+
             "notes":
             "Not enough readable text."
         }
 
-    try:
+    text = text[:1200]
 
-        from transformers import pipeline
+    summarizer = load_model()
 
-        generator = pipeline(
-            "summarization",
-            model="Falconsai/text_summarization"
-        )
+    result = summarizer(
 
-        text = text[:1000]
+        text,
 
-        output = generator(
-            text,
-            max_length=80,
-            min_length=20,
-            do_sample=False
-        )
+        max_length=150,
 
-        return {
+        min_length=60,
 
-            "notes":
+        do_sample=False
 
-            output[0][
-                "summary_text"
-            ]
+    )
 
-        }
+    return {
 
-    except Exception:
+        "notes":
 
-        words = text.split()
+        result[0][
+            "summary_text"
+        ]
 
-        summary = " ".join(
-            words[:120]
-        )
-
-        return {
-
-            "notes":
-
-f"""
-Summary
-
-{summary}
-"""
-
-        }
+    }
