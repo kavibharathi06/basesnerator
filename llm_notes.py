@@ -1,13 +1,6 @@
-from transformers import pipeline
-
-
-generator = pipeline(
-    "summarization",
-    model="Falconsai/text_summarization"
-)
-
-
 def generate_notes(text):
+
+    text = text.strip()
 
     if len(text.split()) < 20:
 
@@ -16,23 +9,50 @@ def generate_notes(text):
             "Not enough readable text."
         }
 
-    text = text[:1000]
+    try:
 
-    output = generator(
+        from transformers import pipeline
 
-        text,
+        generator = pipeline(
+            "summarization",
+            model="Falconsai/text_summarization"
+        )
 
-        max_length=80,
+        text = text[:1000]
 
-        min_length=20,
+        output = generator(
+            text,
+            max_length=80,
+            min_length=20,
+            do_sample=False
+        )
 
-        do_sample=False
+        return {
 
-    )
+            "notes":
 
-    return {
+            output[0][
+                "summary_text"
+            ]
 
-        "notes":
-        output[0]["summary_text"]
+        }
 
-    }
+    except Exception:
+
+        words = text.split()
+
+        summary = " ".join(
+            words[:120]
+        )
+
+        return {
+
+            "notes":
+
+f"""
+Summary
+
+{summary}
+"""
+
+        }
