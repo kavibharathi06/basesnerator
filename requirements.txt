@@ -1,19 +1,19 @@
 streamlit==1.40.1
-numpy==1.24.4
+
+numpy==1.26.4
 opencv-python-headless==4.10.0.84
-pandas==2.0.3
+
+pandas==2.2.2
 pillow==10.4.0
 reportlab==4.4.3
 
 pytesseract==0.3.13
 
 transformers==4.46.3
-torch==2.4.1
+torch==2.5.1
+
 sentencepiece==0.2.0
 accelerate==1.0.1
 
 requests==2.32.4
-protobuf==5.29.6
-typing_extensions==4.13.2
-packaging==24.2
 watchdog==4.0.2
