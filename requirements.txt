@@ -11,6 +11,7 @@ pytesseract
 
 transformers==4.38.2
 sentencepiece
+torch
 
 requests
 watchdog
