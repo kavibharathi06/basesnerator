@@ -1,19 +1,16 @@
 streamlit==1.40.1
 
-numpy<2
-opencv-python-headless
+numpy==1.26.4
+opencv-python-headless==4.10.0.84
 
-pandas
-Pillow
+pandas==2.2.2
+Pillow==11.0.0
 
 reportlab
 pytesseract
 
 transformers==4.38.2
-tokenizers==0.15.2
 sentencepiece
-
-torch==2.2.2
 
 requests
 watchdog
