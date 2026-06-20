@@ -9,12 +9,11 @@ Pillow>=11.0.0
 
 reportlab
 
+pytesseract
+
 transformers==4.38.2
 tokenizers==0.15.2
 sentencepiece
 
 requests
 watchdog
-
-easyocr
-torch==2.5.1
