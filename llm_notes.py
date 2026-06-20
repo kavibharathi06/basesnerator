@@ -5,14 +5,12 @@ import streamlit as st
 @st.cache_resource
 def load_model():
 
-    summarizer = pipeline(
+    return pipeline(
         "summarization",
         model="sshleifer/distilbart-cnn-12-6",
         framework="pt",
         device=-1
     )
-
-    return summarizer
 
 
 def generate_notes(text):
@@ -26,24 +24,19 @@ def generate_notes(text):
             "Not enough readable text."
         }
 
-    text = text[:1000]
+    text = text[:1200]
 
     summarizer = load_model()
 
     result = summarizer(
-
         text,
-
-        max_length=100,
-        min_length=30,
+        max_length=150,
+        min_length=60,
         truncation=True,
         do_sample=False
-
     )
 
     return {
-
         "notes":
         result[0]["summary_text"]
-
     }
